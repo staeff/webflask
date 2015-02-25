@@ -1,0 +1,43 @@
+USED_CONFIG: DevelopmentConfig
+
+
+DefaultConfig:
+  App:
+    NAME: test
+    MIGRATE_REPO_PATH: $BASEDIR/db_repository
+
+  Flask:
+    # http://flask.pocoo.org/docs/0.10/config/
+    SECRET_KEY: SoseTalalodKi!
+    ALLOW_API_SIMPLE_AUTH: False
+    DEBUG: False
+    TESTING: False
+
+    # https://pythonhosted.org/Flask-SQLAlchemy/config.html
+    SQLALCHEMY_DATABASE_URI: sqlite:///$BASEDIR/app.sqlite
+
+
+ProductionConfig:
+  Base: DefaultConfig
+
+  Flask:
+    SQLALCHEMY_DATABASE_URI: mysql+pymysql://tasks:a@localhost/tasks
+
+
+DevelopmentConfig:
+  Base: DefaultConfig
+
+  Flask:
+    WTF_CSRF_ENABLED: False
+    DEBUG: True
+
+    # http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvi-debugging-testing-and-profiling
+    # SQLALCHEMY_RECORD_QUERIES = True
+
+
+TestingConfig:
+  Base: DefaultConfig
+
+  Flask:
+    WTF_CSRF_ENABLED: False
+    TESTING: True
